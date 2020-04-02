@@ -9,15 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @Controller
+@SessionAttributes("plant")
 public class PlantController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -25,10 +23,10 @@ public class PlantController {
     @Autowired
     private PlantService plantService;
 
-    @GetMapping("/plant")
+    @GetMapping({"/", "/plant"})
     public String getIndex(Model model) {
         List<Plant> plants = plantService.findAll();
-        logger.debug("FOUND " + plants.size() + " plants");
+        logger.info("FOUND " + plants.size() + " plants");
         model.addAttribute("plants", plants);
         return "plant/index";
     }
