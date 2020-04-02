@@ -42,7 +42,6 @@ public class PlantController {
                 plantService
                         .findById(id)
                         .orElseThrow(() -> new NotFoundException("plant[ID: " + id + "]"));
-
         return "plant/form";
     }
 
