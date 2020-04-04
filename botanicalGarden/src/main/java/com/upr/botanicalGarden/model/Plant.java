@@ -49,7 +49,6 @@ public class Plant {
     public Plant() {
     }
 
-
     public Long getId() {
         return id;
     }

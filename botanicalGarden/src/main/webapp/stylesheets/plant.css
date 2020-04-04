@@ -1,0 +1,107 @@
+html {
+    font-size: .9rem;
+}
+
+tr {
+    cursor: default;
+}
+
+a.view, a.edit, a.delete {
+    margin-right: 2px;
+}
+
+a.view {
+    color: #428bca;
+    pointer-events: auto;
+}
+
+a.edit {
+    color: orange;
+}
+
+a.delete {
+    color: red;
+}
+
+#new-demand, #new-candidate {
+    position: relative;
+    margin-top: 20px;
+}
+
+.skills-div {
+    padding: 0;
+}
+
+.skillList {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#header, .skill {
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #000000;
+    background-color: #e9ecef;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    pointer-events: none;
+}
+
+.skill {
+    float: left;
+    display: inline;
+    margin-left: 0;
+    margin-right: .4rem;
+    margin-bottom: .4rem;
+}
+
+.invalid-feedback {
+    padding: 0;
+}
+
+.linkedin-link {
+    color: #0077B5;
+}
+
+.fa-linkedin {
+    vertical-align: middle;
+}
+
+#selectedSkills {
+    display: inline;
+}
+
+#candidate-suggestions, #recruitment-events {
+    margin-top: 2.4rem;
+}
+
+td.date-nowrap {
+    white-space: nowrap;
+}
+
+.action-toolbar {
+    white-space: nowrap;
+}
+
+.skill-col {
+    font-size: 0.8rem;
+}
+
+.action-button {
+    display: flex;
+    align-items: center;
+}
+
+.material-icons.md-18 {
+    font-size: 18px;
+}
+
+#recruitment-events {
+    font-size: .9rem;
+}
+
+/*# sourceMappingURL=candidate.css.map */

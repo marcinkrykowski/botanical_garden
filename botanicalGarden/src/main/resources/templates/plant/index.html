@@ -1,11 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Index</title>
-    <h2>Index</h2>
+    <title>Plant</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/plant.css">
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            var wireUpClickables = function(){
+                $(".clickable").click(function() {
+                    window.document.location = $(this).parent().attr('href');
+                });
+            }
+
+            $('#plant')
+                .on( 'order.dt',  function () { wireUpClickables() } )
+                .on( 'search.dt', function () { wireUpClickables() } )
+                .on( 'page.dt',   function () { wireUpClickables() } )
+                .DataTable( {
+                    responsive: true,
+                    "pageLength": 10
+                } );
+        } );
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
 </head>
+
 <body>
+<th:block layout:fragment="content">
+    <div>
+        <div class="mt-4 mb-3 clearfix">
+            <h3 class="float-left">Plant</h3>
+            <a th:href="@{/plant/new}" id="new-plant" class="btn btn-primary float-right">New Plant</a>
+        </div>
+
+        <div class="well">
+            <div class="border-top pt-3" th:if="${plants.empty}">
+                <h6>No results.</h6>
+                <p>There are no plants to show.</p>
+                <p>Add some by clicking the &quot;New Plant&quot; button.</p>
+            </div>
+            <table class="table table-hover" id="plant" th:if="${plants.size() > 0}">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Variety</th>
+                    <th scope="col">Cultivation method</th>
+                    <th scope="col">Details</th>
+                    <th scope="col">Planting date</th>
+                    <th scope="col">Exhibition start</th>
+                    <th scope="col">Exhibition end</th>
+                    <th scope="col">Biological origin</th>
+                    <th scope="col">Original origin</th>
+                </tr>
+                </thead>
+                <tr th:each="plant : ${plants}" th:href="@{/plant/view/{id}(id=${plant.id})}" th:id="${plant.id}" style="cursor: pointer" class="clickable-row">
+                    <td class="clickable" th:text="${plant.name}"></td>
+                    <td class="clickable" th:text="${plant.variety}"></td>
+                    <td class="clickable" th:text="${plant.cultivationMethod}"></td>
+                    <td class="clickable" th:text="${plant.details}"></td>
+                    <td class="date-column clickable" th:text="${#dates.format(plant.getPlantingDate(), 'dd-MMM-yyyy')}"></td>
+                    <td class="date-column clickable" th:text="${#dates.format(plant.getExhibitionStart(), 'dd-MMM-yyyy')}"></td>
+                    <td class="date-column clickable" th:text="${#dates.format(plant.getExhibitionEnd(), 'dd-MMM-yyyy')}"></td>
+                    <td class="clickable" th:text="${plant.biologicalOrigin}"></td>
+                    <td class="clickable" th:text="${plant.originalOrigin}"></td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+</th:block>
+
+<th:block layout:fragment="script">
+    <script src="/js/plants.js"></script>
+</th:block>
 
 </body>
 </html>
