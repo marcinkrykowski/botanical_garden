@@ -16,10 +16,7 @@ public class PlantService {
     private PlantRepository plantRepository;
 
     public List<Plant> findAll() {
-        //return plantRepository.findAll();
-        List<Plant> plants = new ArrayList<>();
-        plants.add(new Plant());
-        return plants;
+        return plantRepository.findAll();
     }
 
     public Plant save(Plant candidate) {
