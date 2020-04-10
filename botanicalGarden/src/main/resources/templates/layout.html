@@ -49,45 +49,17 @@
         <nav>
             <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
             <ul class="nav-list" th:with="requestURI=${#httpServletRequest.getRequestURI()}">
-<!--                <li th:if="${#authorization.expression('hasRole(''__${@environment.getProperty('role.admin')}__'')')}">-->
-<!--                    <a href="#">Admin</a>-->
-<!--                    <ul class="nav-dropdown">-->
-<!--                        <li>-->
-<!--                            <a th:href="@{/admin/client}">Clients</a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            <a th:href="@{/admin/supervisor}">Supervisors</a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            <a th:href="@{/admin/owner}">Owners</a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            <a th:href="@{/admin/location}">Locations</a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            <a th:href="@{/admin/skill}">Skills</a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            <a th:href="@{/admin/jobrole}">Job Roles</a>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                </li>-->
                 <li th:classappend="${requestURI.startsWith('/plant') ? 'active':''}">
                     <a href="#" th:href="@{/plant}">Plants</a>
                 </li>
 
-<!--                <li>-->
-<!--                    <a id="auth" ><i class="fa fa-user-circle"></i>-->
-<!--                        <span th:text="${#authentication.name}"></span></a>-->
-<!--                    <ul class="nav-dropdown">-->
-<!--                        <li>-->
-<!--                            <a th:href="@{/logout}">Logout</a>-->
-<!--                        </li>-->
-
-
-<!--                    </ul>-->
-<!--                </li>-->
-
+                <li>
+                    <ul class="nav-dropdown">
+                        <li>
+                            <a th:href="@{/logout}">Logout</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </div>

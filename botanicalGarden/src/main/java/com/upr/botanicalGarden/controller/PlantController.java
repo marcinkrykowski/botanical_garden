@@ -1,6 +1,7 @@
 package com.upr.botanicalGarden.controller;
 
 import com.upr.botanicalGarden.controller.exceptions.NotFoundException;
+import com.upr.botanicalGarden.controller.model.PlantForm;
 import com.upr.botanicalGarden.model.Plant;
 import com.upr.botanicalGarden.service.PlantService;
 
@@ -32,7 +33,8 @@ public class PlantController {
     }
 
     @GetMapping("/plant/new")
-    public String getNew() {
+    public String getNew(Model model) {
+        model.addAttribute("plantForm", new PlantForm());
         return "plant/form";
     }
 
@@ -46,14 +48,17 @@ public class PlantController {
     }
 
     @GetMapping("/plant/view/{id}")
-    public String showplant(@PathVariable("id") long id) {
-
+    public String showplant(@PathVariable("id") long id, Model model) {
         Plant plant =
                 plantService
                         .findById(id)
                         .orElseThrow(() -> new NotFoundException("plant[ID: " + id + "]"));
+        PlantForm plantForm = populatePlantForm(plant);
+
+        model.addAttribute("plantForm", plantForm);
         return "plant/view";
     }
+
 
     @GetMapping("/plant/delete/{id}")
     public String delete(@PathVariable("id") long id, Model model) {
@@ -66,10 +71,39 @@ public class PlantController {
     }
 
     @PostMapping("/plant")
-    public String save(
-            @ModelAttribute Plant plant) {
+    public String save(@ModelAttribute PlantForm plantForm) {
+
+        Plant plant = populatePlantForm(plantForm);
         logger.info("Saving plant: " + plant);
         plantService.save(plant);
         return "redirect:/plant";
+    }
+
+    private PlantForm populatePlantForm(Plant plant) {
+        return new PlantForm(
+                plant.getId(),
+                plant.getName(),
+                plant.getVariety(),
+                plant.getCultivationMethod(),
+                plant.getDetails(),
+                plant.getPlantingDate(),
+                plant.getExhibitionStart(),
+                plant.getExhibitionEnd(),
+                plant.getBiologicalOrigin(),
+                plant.getOriginalOrigin());
+    }
+
+    private Plant populatePlantForm(PlantForm plantForm) {
+        Plant plant;
+        if (plantForm.getPlantId() == null) {
+            plant = new Plant();
+        } else {
+            Optional<Plant> plantOptional = plantService.findById(plantForm.getPlantId());
+            plant =
+                    plantOptional.orElseThrow(
+                            () -> new NotFoundException("Plant[ID: " + plantForm.getPlantId() + "]"));
+        }
+
+        return plantForm.populatePlant(plant);
     }
 }
