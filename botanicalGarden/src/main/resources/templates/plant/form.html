@@ -1,11 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Form plant</title>
-    <h2>Form plant</h2>
+    <title>
+        <th:block th:text="${plantForm.plantId == null} ? 'New Plant' : 'Edit Plant'"/>
+    </title>
+    <link rel="stylesheet" href="/stylesheets/plant.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body>
+<body>
+<th:block layout:fragment="content">
+    <h3 class="text-centre mt-4" th:text="${plantForm.plantId == null} ? 'New Plant' : 'Edit Plant'"/>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="well">
+                <form action="#" id="new-plant" th:action="@{/plant}" th:object="${plantForm}"
+                      method="POST">
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <input type="hidden" class="form-control" th:field="*{plantId}"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label th:for="name" class="col-form-label col-md-4">Name</label>
+                        <input type="text" class="form-control col-md-8"
+                               th:classappend="${#fields.hasErrors('name')}? is-invalid" th:field="*{name}"/>
+                        <div class="invalid-feedback col-md-8 offset-md-4" id="name-errors" th:errors="*{name}"/>
+                    </div>
+
+                    <div class="form-group row">
+                        <label th:for="variety" class="col-form-label col-md-4">Variety</label>
+                        <input type="text" class="form-control col-md-8"
+                               th:classappend="${#fields.hasErrors('variety')}? is-invalid" th:field="*{variety}"/>
+                        <div class="invalid-feedback col-md-8 offset-md-4" id="name-errors" th:errors="*{variety}"/>
+                    </div>
+
+                    <div class="form-group row">
+                        <label th:for="cultivationMethod" class="col-form-label col-md-4">Cultivation method</label>
+                        <input type="text" class="form-control col-md-8"
+                               th:classappend="${#fields.hasErrors('cultivationMethod')}? is-invalid" th:field="*{cultivationMethod}"/>
+                        <div class="invalid-feedback col-md-8 offset-md-4" id="name-errors" th:errors="*{cultivationMethod}"/>
+                    </div>
+
+                    <div class="form-group row">
+                        <label th:for="biologicalOrigin" class="col-form-label col-md-4">Biological origin</label>
+                        <input type="text" class="form-control col-md-8"
+                               th:classappend="${#fields.hasErrors('biologicalOrigin')}? is-invalid" th:field="*{biologicalOrigin}"/>
+                        <div class="invalid-feedback col-md-8 offset-md-4" id="name-errors" th:errors="*{biologicalOrigin}"/>
+                    </div>
+
+                    <div class="form-group row">
+                        <label th:for="originalOrigin" class="col-form-label col-md-4">Orginal origin</label>
+                        <input type="text" class="form-control col-md-8"
+                               th:classappend="${#fields.hasErrors('originalOrigin')}? is-invalid" th:field="*{originalOrigin}"/>
+                        <div class="invalid-feedback col-md-8 offset-md-4" id="name-errors" th:errors="*{originalOrigin}"/>
+                    </div>
+
+                    <div class="form-group row">
+                        <label th:for="plantingDate" class="col-form-label col-md-3">Planting date</label>
+                        <input type="date" class="form-control col-md-8" th:classappend="${#fields.hasErrors('plantingDate')}? is-invalid" th:field="*{plantingDate}"/>
+                        <div class="invalid-feedback col-md-8 offset-md-3" id="date-errors" th:errors="*{plantingDate}" />
+                    </div>
+
+                    <div class="form-group row">
+                        <label th:for="exhibitionStart" class="col-form-label col-md-3">Exhibition start date</label>
+                        <input type="date" class="form-control col-md-8" th:classappend="${#fields.hasErrors('exhibitionStart')}? is-invalid" th:field="*{exhibitionStart}"/>
+                        <div class="invalid-feedback col-md-8 offset-md-3" id="date-errors" th:errors="*{exhibitionStart}" />
+                    </div>
+
+                    <div class="form-group row">
+                        <label th:for="exhibitionEnd" class="col-form-label col-md-3">Exhibition end date</label>
+                        <input type="date" class="form-control col-md-8" th:classappend="${#fields.hasErrors('exhibitionEnd')}? is-invalid" th:field="*{exhibitionEnd}"/>
+                        <div class="invalid-feedback col-md-8 offset-md-3" id="date-errors" th:errors="*{exhibitionEnd}" />
+                    </div>
+
+                    <div class="form-group row">
+                        <label th:for="details" class="col-form-label col-md-4">Details</label>
+                        <textarea class="form-control col-md-8"
+                                  th:classappend="${#fields.hasErrors('details')}? is-invalid" th:field="*{details}"
+                                  th:value="${details}"/>
+                        <div class="invalid-feedback col-md-8 offset-md-4" id="plant-details-errors"
+                             th:errors="*{details}"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="submit">Save Plant</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block layout:fragment="style">
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css}" rel="stylesheet"/>
+</th:block>
 
 </body>
 </html>
