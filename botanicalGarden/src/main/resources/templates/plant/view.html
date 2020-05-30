@@ -16,14 +16,14 @@
 <body>
 <th:block layout:fragment="content">
     <h3 class="text-centre mt-4" th:text="${plantForm.name}"></h3>
-    <div class="col-md-5">
-        <div class="btn-group" role="group" aria-label="Actions">
-            <a class="btn btn-danger action-button"
-               onclick="return confirm('Are you sure you want to delete this plant?')"
-               th:href="@{/plant/delete/{id}(id=${plantForm.plantId})}" title="Delete" id="delete">Delete&nbsp;<i
-                    class="material-icons md-18">&#xE872;</i></a>
-        </div>
-    </div>
+<!--    <div class="col-md-5">-->
+<!--        <div class="btn-group" role="group" aria-label="Actions">-->
+<!--            <a class="btn btn-danger action-button"-->
+<!--               onclick="return confirm('Are you sure you want to delete this plant?')"-->
+<!--               th:href="@{/plant/delete/{id}(id=${plantForm.plantId})}" title="Delete" id="delete">Delete&nbsp;<i-->
+<!--                    class="material-icons md-18">&#xE872;</i></a>-->
+<!--        </div>-->
+<!--    </div>-->
     <div class="row">
         <div class="col-md-5">
             <div class="well">
@@ -37,53 +37,53 @@
                     <div class="form-group row">
                         <label th:for="name" class="col-form-label col-md-4">Name</label>
                         <input type="text" class="form-control col-md-8"
-                               th:classappend="${#fields.hasErrors('name')}? is-invalid" th:field="*{name}"/>
+                               th:classappend="${#fields.hasErrors('name')}? is-invalid" th:field="*{name}"  readonly = "readonly" />
                         <div class="invalid-feedback col-md-8 offset-md-4" id="name-errors" th:errors="*{name}"/>
                     </div>
 
                     <div class="form-group row">
                         <label th:for="variety" class="col-form-label col-md-4">Variety</label>
                         <input type="text" class="form-control col-md-8"
-                               th:classappend="${#fields.hasErrors('variety')}? is-invalid" th:field="*{variety}"/>
+                               th:classappend="${#fields.hasErrors('variety')}? is-invalid" th:field="*{variety}" readonly = "readonly"/>
                         <div class="invalid-feedback col-md-8 offset-md-4" id="name-errors" th:errors="*{variety}"/>
                     </div>
 
                     <div class="form-group row">
                         <label th:for="cultivationMethod" class="col-form-label col-md-4">Cultivation method</label>
                         <input type="text" class="form-control col-md-8"
-                               th:classappend="${#fields.hasErrors('cultivationMethod')}? is-invalid" th:field="*{cultivationMethod}"/>
+                               th:classappend="${#fields.hasErrors('cultivationMethod')}? is-invalid" th:field="*{cultivationMethod}" readonly = "readonly"/>
                         <div class="invalid-feedback col-md-8 offset-md-4" id="name-errors" th:errors="*{cultivationMethod}"/>
                     </div>
 
                     <div class="form-group row">
                         <label th:for="biologicalOrigin" class="col-form-label col-md-4">Biological origin</label>
                         <input type="text" class="form-control col-md-8"
-                               th:classappend="${#fields.hasErrors('biologicalOrigin')}? is-invalid" th:field="*{biologicalOrigin}"/>
+                               th:classappend="${#fields.hasErrors('biologicalOrigin')}? is-invalid" th:field="*{biologicalOrigin}" readonly = "readonly"/>
                         <div class="invalid-feedback col-md-8 offset-md-4" id="name-errors" th:errors="*{biologicalOrigin}"/>
                     </div>
 
                     <div class="form-group row">
                         <label th:for="originalOrigin" class="col-form-label col-md-4">Orginal origin</label>
                         <input type="text" class="form-control col-md-8"
-                               th:classappend="${#fields.hasErrors('originalOrigin')}? is-invalid" th:field="*{originalOrigin}"/>
+                               th:classappend="${#fields.hasErrors('originalOrigin')}? is-invalid" th:field="*{originalOrigin}" readonly = "readonly"/>
                         <div class="invalid-feedback col-md-8 offset-md-4" id="name-errors" th:errors="*{originalOrigin}"/>
                     </div>
 
                     <div class="form-group row">
                         <label th:for="plantingDate" class="col-form-label col-md-3">Planting date</label>
-                        <input type="date" class="form-control col-md-8" th:classappend="${#fields.hasErrors('plantingDate')}? is-invalid" th:field="*{plantingDate}"/>
+                        <input type="date" class="form-control col-md-8" th:classappend="${#fields.hasErrors('plantingDate')}? is-invalid" th:field="*{plantingDate}" readonly = "readonly"/>
                         <div class="invalid-feedback col-md-8 offset-md-3" id="date-errors" th:errors="*{plantingDate}" />
                     </div>
 
                     <div class="form-group row">
                         <label th:for="exhibitionStart" class="col-form-label col-md-3">Exhibition start date</label>
-                        <input type="date" class="form-control col-md-8" th:classappend="${#fields.hasErrors('exhibitionStart')}? is-invalid" th:field="*{exhibitionStart}"/>
+                        <input type="date" class="form-control col-md-8" th:classappend="${#fields.hasErrors('exhibitionStart')}? is-invalid" th:field="*{exhibitionStart}" readonly = "readonly"/>
                         <div class="invalid-feedback col-md-8 offset-md-3" id="date-errors" th:errors="*{exhibitionStart}" />
                     </div>
 
                     <div class="form-group row">
                         <label th:for="exhibitionEnd" class="col-form-label col-md-3">Exhibition end date</label>
-                        <input type="date" class="form-control col-md-8" th:classappend="${#fields.hasErrors('exhibitionEnd')}? is-invalid" th:field="*{exhibitionEnd}"/>
+                        <input type="date" class="form-control col-md-8" th:classappend="${#fields.hasErrors('exhibitionEnd')}? is-invalid" th:field="*{exhibitionEnd}" readonly = "readonly"/>
                         <div class="invalid-feedback col-md-8 offset-md-3" id="date-errors" th:errors="*{exhibitionEnd}" />
                     </div>
 
@@ -91,11 +91,11 @@
                         <label th:for="details" class="col-form-label col-md-4">Details</label>
                         <textarea class="form-control col-md-8"
                                   th:classappend="${#fields.hasErrors('details')}? is-invalid" th:field="*{details}"
-                                  th:value="${details}"/>
+                                  th:value="${details}" readonly = "readonly"/>
                         <div class="invalid-feedback col-md-8 offset-md-4" id="plant-details-errors"
-                             th:errors="*{details}"/>
+                             th:errors="*{details}" />
                     </div>
-                    <button type="submit" class="btn btn-primary" id="submit">Save Plant</button>
+<!--                    <button type="submit" class="btn btn-primary" id="submit">Save Plant</button>-->
 
                 </form>
 
